@@ -24,8 +24,9 @@ class App extends React.Component {
     });
   };
   render() {
+    const { shoppingCart, avaliableProducts } = this.state;
     const style =
-      this.state.shoppingCart === 0
+      shoppingCart === 0
         ? {
             opacity: 0.3
           }
@@ -34,26 +35,22 @@ class App extends React.Component {
       <div className="App-div">
         <button
           className="App-button"
-          disabled={this.state.shoppingCart ? false : true}
+          disabled={shoppingCart ? false : true}
           onClick={this.handleRemoveFromCart}
         >
           -
         </button>
 
-        <span style={style}> {this.state.shoppingCart} </span>
+        <span style={style}> {shoppingCart} </span>
 
         <button
           className="App-button"
-          disabled={
-            this.state.shoppingCart === this.state.avaliableProducts
-              ? true
-              : false
-          }
+          disabled={shoppingCart === avaliableProducts ? true : false}
           onClick={this.handleAddToCart}
         >
           +
         </button>
-        {this.state.shoppingCart > 0 && (
+        {shoppingCart > 0 && (
           <button className="App-button" onClick={this.handleBuy}>
             Kup
           </button>
