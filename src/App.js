@@ -5,7 +5,7 @@ import "./App.css";
 class App extends React.Component {
   state = {
     avaliableProducts: 7,
-    shoppingCart: 5
+    shoppingCart: 1
   };
   handleRemoveFromCart = () => {
     this.setState({
@@ -17,7 +17,19 @@ class App extends React.Component {
       shoppingCart: this.state.shoppingCart + 1
     });
   };
+  handleBuy = () => {
+    this.setState({
+      avaliableProducts: this.state.avaliableProducts - this.state.shoppingCart,
+      shoppingCart: 0
+    });
+  };
   render() {
+    const style =
+      this.state.shoppingCart === 0
+        ? {
+            opacity: 0.3
+          }
+        : {};
     return (
       <div className="App-div">
         <button
@@ -27,7 +39,9 @@ class App extends React.Component {
         >
           -
         </button>
-        <span> {this.state.shoppingCart} </span>
+
+        <span style={style}> {this.state.shoppingCart} </span>
+
         <button
           className="App-button"
           disabled={
@@ -39,6 +53,11 @@ class App extends React.Component {
         >
           +
         </button>
+        {this.state.shoppingCart > 0 && (
+          <button className="App-button" onClick={this.handleBuy}>
+            Kup
+          </button>
+        )}
       </div>
     );
   }
